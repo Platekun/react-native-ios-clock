@@ -1,0 +1,26 @@
+dependencies: \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/container/detail/F14Table.cpp \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/container/detail/F14Table.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/Bits.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/lang/Bits.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/ConstexprMath.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/Portability.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/portability/Config.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/CPortability.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/Utility.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/Traits.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/lang/Assume.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/portability/Builtins.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/Likely.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/ScopeGuard.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/Preprocessor.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/lang/UncaughtExceptions.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/functional/ApplyTuple.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/functional/Invoke.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/lang/Align.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/lang/Exception.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/CppAttributes.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/lang/Launder.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/lang/SafeAssert.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/container/detail/F14Defaults.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native/third-party/folly-2018.10.22.00/folly/container/detail/F14IntrinsicsAvailability.h
