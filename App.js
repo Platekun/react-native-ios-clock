@@ -1,5 +1,5 @@
 import React, { Component } from "react";
 
-import { Timer } from "./src";
+import { Features } from "./src";
 
-export default () => <Timer />;
+export default () => <Features />;
