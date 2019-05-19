@@ -1,0 +1,28 @@
+dependencies: \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native-gesture-handler/ios/RNRootViewGestureRecognizer.m \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native-gesture-handler/ios/RNRootViewGestureRecognizer.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native-gesture-handler/ios/RNGestureHandler.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native-gesture-handler/ios/RNGestureHandlerState.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native-gesture-handler/ios/RNGestureHandlerDirection.h \
+  /Users/camilo/Documents/Playground/timer/node_modules/react-native-gesture-handler/ios/RNGestureHandlerEvents.h \
+  /Users/camilo/Documents/Playground/timer/ios/build/timer/Build/Products/Debug-iphonesimulator/include/React/RCTEventDispatcher.h \
+  /Users/camilo/Documents/Playground/timer/ios/build/timer/Build/Products/Debug-iphonesimulator/include/React/RCTBridge.h \
+  /Users/camilo/Documents/Playground/timer/ios/build/timer/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeDelegate.h \
+  /Users/camilo/Documents/Playground/timer/ios/build/timer/Build/Products/Debug-iphonesimulator/include/React/RCTJavaScriptLoader.h \
+  /Users/camilo/Documents/Playground/timer/ios/build/timer/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
+  /Users/camilo/Documents/Playground/timer/ios/build/timer/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
+  /Users/camilo/Documents/Playground/timer/ios/build/timer/Build/Products/Debug-iphonesimulator/include/React/RCTFrameUpdate.h \
+  /Users/camilo/Documents/Playground/timer/ios/build/timer/Build/Products/Debug-iphonesimulator/include/React/RCTInvalidating.h \
+  /Users/camilo/Documents/Playground/timer/ios/build/timer/Build/Products/Debug-iphonesimulator/include/React/RCTConvert.h \
+  /Users/camilo/Documents/Playground/timer/ios/build/timer/Build/Products/Debug-iphonesimulator/include/React/RCTAnimationType.h \
+  /Users/camilo/Documents/Playground/timer/ios/build/timer/Build/Products/Debug-iphonesimulator/include/React/RCTBorderStyle.h \
+  /Users/camilo/Documents/Playground/timer/ios/build/timer/Build/Products/Debug-iphonesimulator/include/React/RCTLog.h \
+  /Users/camilo/Documents/Playground/timer/ios/build/timer/Build/Products/Debug-iphonesimulator/include/React/RCTAssert.h \
+  /Users/camilo/Documents/Playground/timer/ios/build/timer/Build/Products/Debug-iphonesimulator/include/React/RCTUtils.h \
+  /Users/camilo/Documents/Playground/timer/ios/build/timer/Build/Products/Debug-iphonesimulator/include/React/RCTPointerEvents.h \
+  /Users/camilo/Documents/Playground/timer/ios/build/timer/Build/Products/Debug-iphonesimulator/include/React/RCTTextDecorationLineType.h \
+  /Users/camilo/Documents/Playground/timer/ios/build/timer/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
+  /Users/camilo/Documents/Playground/timer/ios/build/timer/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /Users/camilo/Documents/Playground/timer/ios/build/timer/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
+  /Users/camilo/Documents/Playground/timer/ios/build/timer/Build/Products/Debug-iphonesimulator/include/yoga/YGValue.h \
+  /Users/camilo/Documents/Playground/timer/ios/build/timer/Build/Products/Debug-iphonesimulator/include/React/RCTTouchHandler.h

@@ -1,9 +1,9 @@
 import React from "react";
-import RN from "react-native";
 import * as XState from "xstate";
 
-import { TimerDisplay } from "./TimerDisplay";
-import { TimerControls } from "./TimerControls";
+import { Screen } from "../components";
+import { StopwatchTime } from "./StopwatchTime";
+import { StopwatchControls } from "./StopwatchControls";
 import { timerMachine } from "./timer-machine";
 
 export class Stopwatch extends React.Component {
@@ -28,10 +28,10 @@ export class Stopwatch extends React.Component {
     const { current } = this.state;
 
     return (
-      <RN.View style={styles.container}>
-        <TimerDisplay time={current.context.time} />
+      <Screen>
+        <StopwatchTime time={current.context.time} />
 
-        <TimerControls
+        <StopwatchControls
           current={current}
           onStart={() => send("START")}
           onCancel={() => send("CANCEL")}
@@ -41,15 +41,7 @@ export class Stopwatch extends React.Component {
           laps={current.context.laps}
           time={current.context.time}
         />
-      </RN.View>
+      </Screen>
     );
   }
 }
-
-const styles = RN.StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});

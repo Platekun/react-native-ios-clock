@@ -1,5 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
 
-import { Features } from "./src";
+import { Root } from "./src";
 
-export default () => <Features />;
+export default () => <Root />;

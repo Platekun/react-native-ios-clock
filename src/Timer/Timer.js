@@ -1,8 +1,10 @@
 import React from "react";
 import RN from "react-native";
 
+import { Screen } from "../components";
+
 export const Timer = () => (
-  <RN.View>
+  <Screen>
     <RN.Text>Timer!</RN.Text>
-  </RN.View>
+  </Screen>
 );
