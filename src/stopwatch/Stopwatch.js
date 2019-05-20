@@ -1,17 +1,17 @@
 import React from "react";
 import * as XState from "xstate";
 
-import { Screen } from "../components";
+import { Screen, AppBar } from "../components";
 import { StopwatchTime } from "./StopwatchTime";
 import { StopwatchControls } from "./StopwatchControls";
-import { timerMachine } from "./timer-machine";
+import { stopwatchMachine } from "./stopwatch-machine";
 
 export class Stopwatch extends React.Component {
   state = {
-    current: timerMachine.initialState
+    current: stopwatchMachine.initialState
   };
 
-  service = XState.interpret(timerMachine).onTransition(current =>
+  service = XState.interpret(stopwatchMachine).onTransition(current =>
     this.setState({ current })
   );
 
@@ -29,6 +29,8 @@ export class Stopwatch extends React.Component {
 
     return (
       <Screen>
+        <AppBar>Stopwatch</AppBar>
+
         <StopwatchTime time={current.context.time} />
 
         <StopwatchControls

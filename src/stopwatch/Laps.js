@@ -2,7 +2,7 @@ import React from "react";
 import RN from "react-native";
 
 import { colors } from "../theme";
-import { formatTime } from "./formatTime";
+import { formatToStopwatchTime } from "../utils";
 import { createLapEntry } from "./createLapEntry";
 
 export function Laps({ currentTime, laps }) {
@@ -13,7 +13,9 @@ export function Laps({ currentTime, laps }) {
       renderItem={({ item }) => (
         <RN.View style={styles.lapItem}>
           <RN.Text style={styles.lapText}>Lap {item.lapNumber}</RN.Text>
-          <RN.Text style={styles.lapText}>{formatTime(item.time)}</RN.Text>
+          <RN.Text style={styles.lapText}>
+            {formatToStopwatchTime(item.time)}
+          </RN.Text>
         </RN.View>
       )}
       style={styles.list}

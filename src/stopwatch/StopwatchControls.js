@@ -1,7 +1,6 @@
 import React from "react";
 import RN from "react-native";
 
-import { colors } from "../theme";
 import { Button } from "../components";
 import { Laps } from "./Laps";
 

@@ -1,12 +1,13 @@
 import React from "react";
 import RN from "react-native";
 
-import { formatTime } from "./formatTime";
+import { formatToStopwatchTime } from "../utils";
+import { TimeText } from "../components";
 
 export function StopwatchTime({ time }) {
   return (
     <RN.View style={styles.time}>
-      <RN.Text style={styles.timeText}>{formatTime(time)}</RN.Text>
+      <TimeText>{formatToStopwatchTime(time)}</TimeText>
     </RN.View>
   );
 }
@@ -18,10 +19,5 @@ const styles = RN.StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 150
-  },
-  timeText: {
-    color: "white",
-    fontSize: 56,
-    fontFamily: "Damascus"
   }
 });
