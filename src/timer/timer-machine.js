@@ -1,5 +1,7 @@
 import * as XState from "xstate";
 
+import { schedule } from "../notifications.service";
+
 export const timerMachine = XState.Machine(
   {
     id: "TimerMachine",
@@ -35,12 +37,12 @@ export const timerMachine = XState.Machine(
             return () => clearInterval(id);
           }
         },
+        onEntry: "setupAlarm",
         on: {
           TICK: [
             {
               target: "idle",
-              cond: "outOfTime",
-              actions: "decreaseTime"
+              cond: "outOfTime"
             },
             {
               actions: "decreaseTime"
@@ -83,8 +85,15 @@ export const timerMachine = XState.Machine(
       }),
 
       decreaseTime: XState.assign({
-        time: ctx => ctx.time - 1
-      })
+        time: ({ time }) => time - 1
+      }),
+
+      setupAlarm: ({ time }) =>
+        schedule({
+          title: "Clock",
+          message: "Time's up!",
+          timeInSeconds: time
+        })
     }
   }
 );
