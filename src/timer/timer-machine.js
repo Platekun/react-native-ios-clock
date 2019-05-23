@@ -10,7 +10,7 @@ export const timerMachine = XState.Machine(
       hours: 0,
       minutes: 0,
       seconds: 0,
-      time: 3600
+      time: 0
     },
     states: {
       idle: {
@@ -26,7 +26,8 @@ export const timerMachine = XState.Machine(
           SECONDS_SET: {
             actions: ["addSeconds", "recalculateTime"]
           }
-        }
+        },
+        onExit: "adjustTime"
       },
       countingDown: {
         invoke: {
@@ -65,7 +66,11 @@ export const timerMachine = XState.Machine(
       outOfTime: ctx => ctx.time === 0
     },
     actions: {
-      reset: XState.assign({ time: 3600 }),
+      reset: XState.assign({
+        hours: 0,
+        minutes: 0,
+        seconds: 0
+      }),
 
       recalculateTime: XState.assign({
         time: ({ hours, minutes, seconds }) =>
@@ -88,11 +93,16 @@ export const timerMachine = XState.Machine(
         time: ({ time }) => time - 1
       }),
 
+      adjustTime: XState.assign({
+        hours: ({ time, hours }) => (time === 0 ? 3600 : hours),
+        time: ({ time }) => (time === 0 ? 3600 : time)
+      }),
+
       setupAlarm: ({ time }) =>
         schedule({
           title: "Clock",
           message: "Time's up!",
-          timeInSeconds: time
+          timeInSeconds: time === 0 ? 3600 : time
         })
     }
   }
