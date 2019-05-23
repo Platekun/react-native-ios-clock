@@ -1,6 +1,7 @@
 import React from "react";
 import RN from "react-native";
 import { useMachine } from "@xstate/react";
+import useAppState from "./useAppState";
 
 import { Screen, AppBar } from "../components";
 import { CountdownControls } from "./CountdownControls";
@@ -8,10 +9,30 @@ import { CountdownDisplay } from "./CountdownDisplay";
 import { TimerControls } from "./TimerControls";
 import { timerMachine } from "./timer-machine";
 
-export function Timer() {
-  const [current, send] = useMachine(timerMachine);
+async function onAppStateChanged({ appState, previousAppState, send }) {
+  const cameFromBackground =
+    previousAppState === "background" && appState === "active";
 
+  if (cameFromBackground) {
+    send("RESTORE");
+  }
+}
+
+export function Timer() {
+  const appState = useAppState();
+  const [previousAppState, setPreviousAppState] = React.useState(appState);
+  const [current, send] = useMachine(timerMachine);
   const { hours, minutes, seconds, time } = current.context;
+
+  React.useEffect(() => {
+    onAppStateChanged({
+      appState,
+      previousAppState,
+      send
+    });
+
+    setPreviousAppState(appState);
+  }, [appState]);
 
   const controls = (
     <TimerControls

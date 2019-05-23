@@ -1,6 +1,6 @@
 import * as XState from "xstate";
 
-import { schedule } from "../notifications.service";
+import { schedule, cancel } from "../notifications.service";
 
 export const timerMachine = XState.Machine(
   {
@@ -10,13 +10,17 @@ export const timerMachine = XState.Machine(
       hours: 0,
       minutes: 0,
       seconds: 0,
-      time: 0
+      time: 0,
+      alarmTime: 0
     },
     states: {
       idle: {
         onEntry: "reset",
         on: {
-          START: "countingDown",
+          START: {
+            target: "countingDown",
+            actions: ["setupAlarm", "saveAlarmTime"]
+          },
           HOURS_SET: {
             actions: ["addHours", "recalculateTime"]
           },
@@ -27,7 +31,7 @@ export const timerMachine = XState.Machine(
             actions: ["addSeconds", "recalculateTime"]
           }
         },
-        onExit: "adjustTime"
+        onExit: "adjustTimeIfNoSelection"
       },
       countingDown: {
         invoke: {
@@ -38,7 +42,6 @@ export const timerMachine = XState.Machine(
             return () => clearInterval(id);
           }
         },
-        onEntry: "setupAlarm",
         on: {
           TICK: [
             {
@@ -49,13 +52,26 @@ export const timerMachine = XState.Machine(
               actions: "decreaseTime"
             }
           ],
-          PAUSE: "paused",
-          CANCEL: "idle"
+          PAUSE: {
+            target: "paused",
+            actions: "cancel"
+          },
+          CANCEL: {
+            target: "idle",
+            actions: "cancel"
+          },
+          RESTORE: {
+            target: "countingDown",
+            actions: "recalculateCountdown"
+          }
         }
       },
       paused: {
         on: {
-          RESUME: "countingDown",
+          RESUME: {
+            target: "countingDown",
+            actions: "setupAlarm"
+          },
           CANCEL: "idle"
         }
       }
@@ -93,7 +109,7 @@ export const timerMachine = XState.Machine(
         time: ({ time }) => time - 1
       }),
 
-      adjustTime: XState.assign({
+      adjustTimeIfNoSelection: XState.assign({
         hours: ({ time, hours }) => (time === 0 ? 3600 : hours),
         time: ({ time }) => (time === 0 ? 3600 : time)
       }),
@@ -103,7 +119,27 @@ export const timerMachine = XState.Machine(
           title: "Clock",
           message: "Time's up!",
           timeInSeconds: time === 0 ? 3600 : time
-        })
+        }),
+
+      saveAlarmTime: XState.assign({
+        alarmTime: ({ time }) => Date.now() + time * 1000
+      }),
+
+      cancel,
+
+      restoreHoursMinutesAndSeconds: XState.assign({
+        hours: (_, e) => e.data.hours,
+        minutes: (_, e) => e.data.minutes,
+        seconds: (_, e) => e.data.seconds
+      }),
+
+      recalculateCountdown: XState.assign({
+        time: ({ alarmTime }) => {
+          const now = Date.now();
+
+          return Math.floor((new Date(alarmTime) - new Date(now)) / 1000);
+        }
+      })
     }
   }
 );
