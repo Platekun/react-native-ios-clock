@@ -61,7 +61,6 @@ export const timerMachine = XState.Machine(
             actions: "cancel"
           },
           RESTORE: {
-            target: "countingDown",
             actions: "recalculateCountdown"
           }
         }

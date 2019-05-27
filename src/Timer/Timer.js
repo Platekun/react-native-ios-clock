@@ -1,13 +1,13 @@
 import React from "react";
 import RN from "react-native";
 import { useMachine } from "@xstate/react";
-import useAppState from "./useAppState";
 
 import { Screen, AppBar } from "../components";
 import { CountdownControls } from "./CountdownControls";
 import { CountdownDisplay } from "./CountdownDisplay";
 import { TimerControls } from "./TimerControls";
 import { timerMachine } from "./timer-machine";
+import { useAppState } from "../hooks";
 
 async function onAppStateChanged({ appState, previousAppState, send }) {
   const cameFromBackground =
