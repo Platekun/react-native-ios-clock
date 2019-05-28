@@ -8,13 +8,17 @@ export const stopwatchMachine = XState.Machine(
     initial: "idle",
     context: {
       time: 0,
-      laps: []
+      laps: [],
+      startTime: 0
     },
     states: {
       idle: {
         onEntry: "reset",
         on: {
-          START: "ticking"
+          START: {
+            target: "ticking",
+            actions: "saveStartTime"
+          }
         }
       },
       ticking: {
@@ -29,13 +33,22 @@ export const stopwatchMachine = XState.Machine(
         on: {
           TICK: { actions: "increaseTime" },
           LAP: { actions: "addLap" },
-          PAUSE: "paused",
-          CANCEL: "idle"
+          PAUSE: {
+            target: "paused",
+            actions: "resetStartTime"
+          },
+          CANCEL: "idle",
+          RESTORE: {
+            actions: "recalculateTime"
+          }
         }
       },
       paused: {
         on: {
-          RESUME: "ticking",
+          RESUME: {
+            target: "ticking",
+            actions: "saveStartTime"
+          },
           CANCEL: "idle"
         }
       }
@@ -43,7 +56,15 @@ export const stopwatchMachine = XState.Machine(
   },
   {
     actions: {
-      reset: XState.assign({ time: 0, laps: [] }),
+      reset: XState.assign({ time: 0, laps: [], time: 0 }),
+
+      saveStartTime: XState.assign({
+        startTime: Date.now()
+      }),
+
+      resetStartTime: XState.assign({
+        startTime: 0
+      }),
 
       increaseTime: XState.assign({
         time: ctx => ctx.time + 1
@@ -54,6 +75,14 @@ export const stopwatchMachine = XState.Machine(
           createLapEntry(ctx.time, ctx.laps.length + 1),
           ...ctx.laps
         ]
+      }),
+
+      recalculateTime: XState.assign({
+        time: ({ time, startTime }) => {
+          const now = Date.now();
+
+          return Math.floor((now - startTime) / 100);
+        }
       })
     }
   }

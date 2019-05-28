@@ -11,3 +11,7 @@ export function schedule({ title, message, timeInSeconds }) {
     date: new Date(Date.now() + timeInSeconds * 1000)
   });
 }
+
+export function cancel() {
+  PushNotification.cancelAllLocalNotifications();
+}
