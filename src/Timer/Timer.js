@@ -1,6 +1,7 @@
 import React from "react";
 import RN from "react-native";
 import { useMachine } from "@xstate/react";
+import AsyncStorage from "@react-native-community/async-storage";
 
 import { Screen, AppBar } from "../components";
 import { CountdownControls } from "./CountdownControls";
@@ -9,25 +10,73 @@ import { TimerControls } from "./TimerControls";
 import { timerMachine } from "./timer-machine";
 import { useAppState } from "../hooks";
 
-async function onAppStateChanged({ appState, previousAppState, send }) {
+const TIMER_KEY_STORAGE = "@TIMER";
+
+async function restoreIfClosed(send) {
+  const stored = await AsyncStorage.getItem(TIMER_KEY_STORAGE);
+  const { previousState, previousContext } = JSON.parse(stored);
+
+  const hadSomethingSaved = !!Object.keys(previousContext);
+
+  if (hadSomethingSaved) {
+    send({
+      type: "RESTORE_FROM_CLOSURE",
+      data: {
+        previousState,
+        ...previousContext
+      }
+    });
+
+    return await AsyncStorage.setItem(
+      TIMER_KEY_STORAGE,
+      JSON.stringify({
+        previousState: null,
+        previousContext: {}
+      })
+    );
+  }
+}
+
+async function onAppStateChanged({
+  appState,
+  previousAppState,
+  current,
+  send
+}) {
   const cameFromBackground =
     previousAppState === "background" && appState === "active";
 
   if (cameFromBackground) {
-    send("RESTORE");
+    return send("RESTORE");
+  }
+
+  const currenctlyInactive = appState === "inactive";
+  if (currenctlyInactive) {
+    return await AsyncStorage.setItem(
+      TIMER_KEY_STORAGE,
+      JSON.stringify({
+        previousState: current.value,
+        previousContext: current.context
+      })
+    );
   }
 }
 
 export function Timer() {
   const appState = useAppState();
-  const [previousAppState, setPreviousAppState] = React.useState(appState);
+  const [previousAppState, setPreviousAppState] = React.useState();
   const [current, send] = useMachine(timerMachine);
   const { hours, minutes, seconds, time } = current.context;
+
+  React.useEffect(() => {
+    restoreIfClosed(send);
+  }, []);
 
   React.useEffect(() => {
     onAppStateChanged({
       appState,
       previousAppState,
+      current,
       send
     });
 

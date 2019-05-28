@@ -29,7 +29,24 @@ export const timerMachine = XState.Machine(
           },
           SECONDS_SET: {
             actions: ["addSeconds", "recalculateTime"]
-          }
+          },
+          RESTORE_FROM_CLOSURE: [
+            {
+              target: "",
+              cond: (_, e) => e.data.previousState === "idle",
+              actions: ["restoreHoursMinutesAndSeconds", "recalculateTime"]
+            },
+            {
+              target: "countingDown",
+              cond: (_, e) => e.data.previousState === "countingDown",
+              actions: ["restoreHoursMinutesAndSeconds", "restoreCountdown"]
+            },
+            {
+              target: "paused",
+              cond: (_, e) => e.data.previousState === "paused",
+              actions: ["restoreHoursMinutesAndSeconds", "restoreTime"]
+            }
+          ]
         },
         onExit: "adjustTimeIfNoSelection"
       },
@@ -132,8 +149,20 @@ export const timerMachine = XState.Machine(
         seconds: (_, e) => e.data.seconds
       }),
 
+      restoreTime: XState.assign({
+        time: (_, e) => e.data.time
+      }),
+
       recalculateCountdown: XState.assign({
         time: ({ alarmTime }) => {
+          const now = Date.now();
+
+          return Math.floor((new Date(alarmTime) - new Date(now)) / 1000);
+        }
+      }),
+
+      restoreCountdown: XState.assign({
+        time: (_, { data: { alarmTime } }) => {
           const now = Date.now();
 
           return Math.floor((new Date(alarmTime) - new Date(now)) / 1000);
